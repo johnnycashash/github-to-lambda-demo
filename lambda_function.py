@@ -1,7 +1,7 @@
-import pandas as pd
+import boto3
+import json
 
+ec2 = boto3.client('ec2')
 def lambda_handler(event, context):
-  d = {'col1': [1,2], 'col2': [3,4]}
-  df = pd.DataFrame(data=d)
-  print(df)
-  print('Done x1 - pushed 8')
+    response = ec2.describe_availability_zones()
+    return {"statusCode": 200, "body": json.dumps(response)}
